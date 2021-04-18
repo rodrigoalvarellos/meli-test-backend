@@ -1,33 +1,33 @@
-import { Injectable } from '@nestjs/common';
-
-const ITEMS = [
-  {
-    author: {
-      name: 'Rodrigo',
-      lastname: 'Alvarellos',
-    },
-    categories: ['Bicicletas', 'Mountain-Bike', 'R29', 'Aluminio'],
-    items: [
-      {
-        id: '1',
-        title: 'Bicicleta roja',
-        price: {
-          currency: '$',
-          amount: '12000',
-          decimals: '00',
-        },
-        picture:
-          'http://http2.mlstatic.com/D_908600-MLA32582065628_102019-I.jpg',
-        condition: 'Nuevo',
-        free_shipping: 'true',
-      },
-    ],
-  },
-];
+import { HttpService, Injectable } from '@nestjs/common';
+// import { Observable } from 'rxjs';
+// import { map } from 'rxjs/operators';
+// import { MeliSearchResponse } from 'src/interfaces/mlSearchResponse.interface';
+// import { searchToItemsTransformer } from '../transformers/SearchToItems.transformer.js';
+// import { SearchResult } from '../../dist/interfaces/searchResult';
+import { SearchResultMock } from '../mocks/SearchResultMock';
 
 @Injectable()
 export class ItemsService {
-  getItemsByFilter() {
-    return ITEMS;
+
+  // https://api.mercadolibre.com/items/​:id
+  // https://api.mercadolibre.com/items/​:id​/description
+  constructor(private httpService: HttpService) {
+    // this.getSearchResult('bicicleta').subscribe((res) =>console.log(res));
   }
+
+  getMockedItems() {
+    return SearchResultMock;
+  }
+
+  // getSearchResult(queryParam: string): Observable<any> {
+  //   return this.httpService
+  //     .get(`https://api.mercadolibre.com/sites/MLA/search?q=${queryParam}`)
+  //     .pipe(
+  //       map((resp) => {
+  //         const result: SearchResult = searchToItemsTransformer(resp.data);
+
+  //         return resp;
+  //       }),
+  //     );
+  // }
 }
