@@ -4,19 +4,22 @@ export interface SearchResult {
     lastname: string;
   };
   categories: string[];
-  items: {
-    id: string;
-    title: string;
-    price: {
-      currency: string;
-      amount: string;
-      decimals: string;
-    };
-    picture: string;
-    condition: string;
-    free_shipping: boolean;
-    address: {
-      state: string;
-    };
-  };
+  items: Item[];  
 }
+
+export interface Item {
+  id: string;
+  title: string;
+  price: {
+    currency: string;
+    amount: string;
+    decimals: string;
+  };
+  picture: string;
+  condition: string;
+  free_shipping: boolean;
+  address: {
+    state: string;
+  }
+}
+

@@ -18,13 +18,15 @@ export class ItemsController {
   @Get(':id')
   getProductById(@Param('id') id: string) {
 
-    const item = this.itemService.getMockedItems().items.find( it => it.id === id);
+    // const item = this.itemService.getMockedItems().items.find( it => it.id === id);
 
-    if( item ) {
-      return item;
-    } else {
-      return {};
-    }
+    // if( item ) {
+    //   return item;
+    // } else {
+    //   return {};
+    // }
+
+    return this.itemService.getMockedProduct();
 
 
      
