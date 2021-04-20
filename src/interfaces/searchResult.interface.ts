@@ -1,13 +1,13 @@
-export interface SearchResult {
+export interface SearchResult {  
+  categories: string[];
+  items: Item[];
+}
+
+export interface Item {
   author: {
     name: string;
     lastname: string;
   };
-  categories: string[];
-  items: Item[];  
-}
-
-export interface Item {
   id: string;
   title: string;
   price: {

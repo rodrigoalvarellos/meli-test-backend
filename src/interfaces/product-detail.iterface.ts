@@ -17,6 +17,7 @@ export interface ProductDetailItem {
       free_shipping: boolean;
       sold_quantity: number;
       description: string;
+      permalink: string;
     };
   }
   

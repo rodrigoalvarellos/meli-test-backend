@@ -1,8 +1,5 @@
 export const SearchResultMock = {
-  author: {
-    name: 'Rodrigo',
-    lastname: 'Alvarellos',
-  },
+  
   categories: [
     {
       id: 'MLA1276',
@@ -23,6 +20,10 @@ export const SearchResultMock = {
   ],
   items: [
     {
+      author: {
+        name: 'Rodrigo',
+        lastname: 'Alvarellos',
+      },
       id: '1',
       title: 'Bicicleta roja',
       price: {
@@ -38,6 +39,10 @@ export const SearchResultMock = {
       },
     },
     {
+      author: {
+        name: 'Rodrigo',
+        lastname: 'Alvarellos',
+      },
       id: '2',
       title: 'Bicicleta verde',
       price: {
@@ -53,6 +58,10 @@ export const SearchResultMock = {
       },
     },
     {
+      author: {
+        name: 'Rodrigo',
+        lastname: 'Alvarellos',
+      },
       id: '3',
       title: 'Bicicleta azul',
       price: {
@@ -68,6 +77,10 @@ export const SearchResultMock = {
       },
     },
     {
+      author: {
+        name: 'Rodrigo',
+        lastname: 'Alvarellos',
+      },
       id: '4',
       title: 'Bicicleta amarilla',
       price: {

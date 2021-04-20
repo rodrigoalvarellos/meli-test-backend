@@ -7,28 +7,33 @@ export class ItemsController {
   
   constructor(private itemService: ItemsService) {}
 
+  // @Get()
+  // async getSearchResults(@Query('q') query) {
+  //   return this.itemService.getMockedItems();
+  // }
+  
   @Get()
   async getSearchResults(@Query('q') query) {
-    // const response = await this.itemService.getSearchResult(query).toPromise();
-    // return response.data;
 
-    return this.itemService.getMockedItems();
+    return this.itemService.getSearchResult(query);
+   
   }
 
   @Get(':id')
   getProductById(@Param('id') id: string) {
-
-    // const item = this.itemService.getMockedItems().items.find( it => it.id === id);
-
-    // if( item ) {
-    //   return item;
-    // } else {
-    //   return {};
-    // }
-
-    return this.itemService.getMockedProduct();
-
-
-     
+    return this.itemService.getProductById(id);
   }
+
+//   @Get(':id')
+//   getProductById(@Param('id') id: string) {
+//     // const item = this.itemService.getMockedItems().items.find( it => it.id === id);
+
+//     // if( item ) {
+//     //   return item;
+//     // } else {
+//     //   return {};
+//     // }
+
+//     return this.itemService.getMockedProduct();     
+//   }
 }

@@ -223,7 +223,7 @@ export interface DifferentialPricing {
   id: number;
 }
 
-export interface Result {
+export interface MeliResult {
   id: string;
   site_id: string;
   title: string;
@@ -304,7 +304,7 @@ export interface MeliSearchResponse {
   site_id: string;
   query: string;
   paging: Paging;
-  results: Result[];
+  results: MeliResult[];
   secondary_results: any[];
   related_results: any[];
   sort: Sort;
