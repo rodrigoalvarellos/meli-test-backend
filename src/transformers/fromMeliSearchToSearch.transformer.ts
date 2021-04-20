@@ -14,6 +14,7 @@ export const fromMeliSearchToSearch = (data: MeliSearchResponse) => {
   
     return {
       id: it.id,
+      seller_id: it.seller.id,
       author: {
         name: '',
         lastname: '',
@@ -27,6 +28,9 @@ export const fromMeliSearchToSearch = (data: MeliSearchResponse) => {
       picture: it.thumbnail,
       condition: it.condition,
       free_shipping: it.shipping.free_shipping,
+      address: {
+        state: it.address.state_name
+      }
     }
   });
 

@@ -13,6 +13,7 @@ import { fromMeliSellerToAuthor } from '../../transformers/fromMeliSellerToAutho
 @Injectable()
 export class ItemsService {
   mlEndpoint = 'https://api.mercadolibre.com';
+  mlSearchLimit = 4;
   // https://api.mercadolibre.com/items/​:id
   // https://api.mercadolibre.com/items/​:id​/description
   // https://api.mercadolibre.com/categories/:categoryId
@@ -28,32 +29,40 @@ export class ItemsService {
     return ProductDetailMock;
   }
 
-  async getSearchResult(queryParam: string) {
-    const url = `${this.mlEndpoint}/sites/MLA/search?limit=4&q=${queryParam}`;
-    const response = await this.httpService
-      .get(url)
-      .pipe(map((resp) => fromMeliSearchToSearch(resp.data)))
-      .toPromise();
-      
-      // if(response) {
-        
-      //   response.items.forEach(it => {
+  async getSearchResult(queryParam: string, categoryParam: string) {
 
-      //   }) ;
+    let url = `${this.mlEndpoint}/sites/MLA/search?limit=${this.mlSearchLimit}`;
 
+    if(queryParam) {
+      url += `&q=${queryParam}`;
+    }
 
-      // }
+    if(categoryParam) {
+      url += `&category=${categoryParam}`;
+    }
 
+    try {
+      const searchResult = await this.httpService
+        .get(url)
+        .pipe(map((resp) => fromMeliSearchToSearch(resp.data)))
+        .toPromise();
 
+      if (searchResult) {
+        for await (const item of searchResult.items) {
+          item.author = await this.getAuthorBySellerId(item.seller_id).catch(
+            (error) => error,
+          );
+        }
+      }
 
-    return response;
+      return searchResult;
+    } catch (error) {}
   }
 
   async getProductById(productId: string) {
     const url = `${this.mlEndpoint}/items/${productId}`;
 
     try {
-
       let resData: MeliProductDetail;
       const product = await this.httpService
         .get(url)
@@ -62,26 +71,23 @@ export class ItemsService {
           map((resp) => fromMeliProductDetailToProductDetail(resp.data)),
         )
         .toPromise();
-  
+
       if (product) {
         product.categories = await this.getCategoriesByProducId(
           resData.category_id,
         );
-  
+
         product.item.description = await this.getProductDescriptionById(
           resData.id,
         );
-  
+
         product.author = await this.getAuthorBySellerId(resData.seller_id);
       }
-  
+
       return product;
-      
     } catch (error) {
-      console.log('Error fetching searched items', error)
-      return error
+      console.log('Error fetching searched items', error);
     }
-   
   }
 
   async getCategoriesByProducId(productId: string) {
@@ -90,10 +96,7 @@ export class ItemsService {
     try {
       const categories = await this.httpService
         .get(url)
-        .pipe(
-          tap((resp) => console.log(resp)),
-          map((resp) => fromMeliCategoriesToCategories(resp.data)),
-        )
+        .pipe(map((resp) => fromMeliCategoriesToCategories(resp.data)))
         .toPromise();
 
       return categories;
@@ -129,7 +132,6 @@ export class ItemsService {
         .pipe(map((resp) => fromMeliSellerToAuthor(resp.data)))
         .toPromise();
 
-      // console.log(author);
       return author;
     } catch (error) {
       console.log('error fetching author', error);
