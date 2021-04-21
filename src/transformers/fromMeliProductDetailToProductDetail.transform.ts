@@ -1,5 +1,6 @@
 import { splitAmount } from '../helpers/helpers';
 import { MeliProductDetail } from '../interfaces/mlProductDetail.interface';
+import { setCurrencySymbol } from '../helpers/currency';
 
 export const fromMeliProductDetailToProductDetail = (
   data: MeliProductDetail,
@@ -18,7 +19,7 @@ export const fromMeliProductDetailToProductDetail = (
       id: data.id,
       title: data.title,
       price: {
-        currency: data.currency_id,
+        currency: setCurrencySymbol(data.currency_id),
         amount: price.amount,
         decimals: price.decimal,
       },

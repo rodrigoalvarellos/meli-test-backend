@@ -1,5 +1,6 @@
 import { MeliSearchResponse } from '../interfaces/mlSearchResponse.interface';
 import { splitAmount } from '../helpers/helpers';
+import { setCurrencySymbol } from '../helpers/currency';
 
 export const fromMeliSearchToSearch = (data: MeliSearchResponse) => {
 
@@ -21,7 +22,7 @@ export const fromMeliSearchToSearch = (data: MeliSearchResponse) => {
       },
       title: it.title,
       price: {
-        currency: it.currency_id,
+        currency: setCurrencySymbol(it.currency_id),
         amount: price.amount,
         decimals: price.decimal,
       },

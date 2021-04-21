@@ -1,14 +1,13 @@
 import { HttpService, Injectable } from '@nestjs/common';
-import { from, Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { ProductDetailMock } from '../../mocks/ProductDetailMock';
 import { SearchResultMock } from '../../mocks/SearchResultMock';
-import { fromMeliSearchToSearch } from '../../transformers/fromMeliSearchToSearch.transformer';
-import { fromMeliProductDetailToProductDetail } from '../../transformers/fromMeliProductDetailToProductDetail.transformer';
+import { fromMeliSearchToSearch } from '../../transformers/fromMeliSearchToSearch.transform';
+import { fromMeliProductDetailToProductDetail } from '../../transformers/fromMeliProductDetailToProductDetail.transform';
 import { MeliProductDetail } from 'src/interfaces/mlProductDetail.interface';
-import { fromMeliCategoriesToCategories } from '../../transformers/fromMeliCategoriesToCategories.transformer';
-import { fromMeliProdDescriptionToDescription } from '../../transformers/fromMeliProdDescriptionToDescription.transformer';
-import { fromMeliSellerToAuthor } from '../../transformers/fromMeliSellerToAuthor.transformer';
+import { fromMeliCategoriesToCategories } from '../../transformers/fromMeliCategoriesToCategories.transform';
+import { fromMeliProdDescriptionToDescription } from '../../transformers/fromMeliProdDescriptionToDescription.transform';
+import { fromMeliSellerToAuthor } from '../../transformers/fromMeliSellerToAuthor.transform';
 
 @Injectable()
 export class ItemsService {

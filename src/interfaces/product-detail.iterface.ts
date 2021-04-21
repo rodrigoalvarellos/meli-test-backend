@@ -3,7 +3,7 @@ export interface ProductDetailItem {
       name: string;
       lastname: string;
     };
-    categories: string[],
+    categories: [],
     item: {
       id: string;
       title: string;
