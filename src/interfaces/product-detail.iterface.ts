@@ -1,23 +1,26 @@
+import { Category } from '../interfaces/category.interface';
+import { Author } from './author.interface';
 export interface ProductDetailItem {
-    author: {
-      name: string;
-      lastname: string;
+    author: Author;
+    categories: Category[],
+    item: ItemPD
+  }
+
+  export interface ItemPD {
+    id: string;
+    seller_id: string | number;
+    title: string;
+    price: {
+      currency: string;
+      amount: string;
+      decimals: string;
     };
-    categories: [],
-    item: {
-      id: string;
-      title: string;
-      price: {
-        currency: string;
-        amount: number;
-        decimals: number;
-      };
-      picture: string;
-      condition: string;
-      free_shipping: boolean;
-      sold_quantity: number;
-      description: string;
-      permalink: string;
-    };
+    picture: string;
+    condition: string;
+    free_shipping: boolean;
+    sold_quantity: number;
+    description: string;
+    permalink: string;
+    
   }
   

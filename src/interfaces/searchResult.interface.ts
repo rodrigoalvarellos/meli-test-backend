@@ -1,14 +1,14 @@
+import { Category } from '../interfaces/category.interface';
+import { Author } from './author.interface';
 export interface SearchResult {  
-  categories: string[];
+  categories: Category[];
   items: Item[];
 }
 
 export interface Item {
-  author: {
-    name: string;
-    lastname: string;
-  };
+  author: Author;
   id: string;
+  seller_id: string | number;
   title: string;
   price: {
     currency: string;

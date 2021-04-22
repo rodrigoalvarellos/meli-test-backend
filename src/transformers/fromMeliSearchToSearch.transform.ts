@@ -1,18 +1,17 @@
 import { MeliSearchResponse } from '../interfaces/mlSearchResponse.interface';
-import { splitAmount } from '../helpers/helpers';
-import { setCurrencySymbol } from '../helpers/currency';
+import { setCurrencySymbol, splitAmount } from '../helpers/currency';
+import { SearchResult } from '../interfaces/searchResult.interface';
 
+/**
+ *  Transform the search results  of the ML api to SearchResult type.
+ */
 export const fromMeliSearchToSearch = (data: MeliSearchResponse) => {
-
   const categories = data.filters.find((filter) => (filter.id = 'category'))
     .values[0].path_from_root;
-  
- 
-  const items = data.results.map( it => {
 
-
+  const items = data.results.map((it) => {
     const price = splitAmount(it.price);
-  
+
     return {
       id: it.id,
       seller_id: it.seller.id,
@@ -30,14 +29,14 @@ export const fromMeliSearchToSearch = (data: MeliSearchResponse) => {
       condition: it.condition,
       free_shipping: it.shipping.free_shipping,
       address: {
-        state: it.address.state_name
-      }
-    }
+        state: it.address.state_name,
+      },
+    };
   });
 
-  const result = {
+  const result: SearchResult = {
     categories: categories,
-    items: items
+    items: items,
   };
 
   return result;

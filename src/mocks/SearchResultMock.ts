@@ -1,96 +1,93 @@
-export const SearchResultMock = {
-  
+import { SearchResult } from "../interfaces/searchResult.interface";
+
+export const SearchResultMock: SearchResult = {
   categories: [
     {
-      id: 'MLA1276',
-      name: 'Deportes y Fitness',
+      id: 'MLA1051',
+      name: 'Celulares y Teléfonos',
     },
     {
-      id: 'MLA1338',
-      name: 'Fitness y Musculación',
-    },
-    {
-      id: 'MLA438160',
-      name: 'Máquinas Cardiovasculares',
-    },
-    {
-      id: 'MLA3095',
-      name: 'Bicicletas Fijas',
+      id: 'MLA1055',
+      name: 'Celulares y Smartphones',
     },
   ],
   items: [
     {
+      id: 'MLA915289303',
+      seller_id: 26941396,
       author: {
-        name: 'Rodrigo',
-        lastname: 'Alvarellos',
+        name: 'MT-ELECTRO',
+        lastname: '',
       },
-      id: '1',
-      title: 'Bicicleta roja',
+      title: 'iPhone 11 64 Gb Negro',
       price: {
         currency: '$',
-        amount: '12000',
+        amount: '134.999',
         decimals: '00',
       },
-      picture: 'http://http2.mlstatic.com/D_908600-MLA32582065628_102019-I.jpg',
-      condition: 'Nuevo',
+      picture: 'http://http2.mlstatic.com/D_916062-MLA43654417337_102020-I.jpg',
+      condition: 'new',
       free_shipping: true,
-      address: {
-        state: 'Córdoba',
-      },
-    },
-    {
-      author: {
-        name: 'Rodrigo',
-        lastname: 'Alvarellos',
-      },
-      id: '2',
-      title: 'Bicicleta verde',
-      price: {
-        currency: '$',
-        amount: '12000',
-        decimals: '00',
-      },
-      picture: 'http://http2.mlstatic.com/D_908600-MLA32582065628_102019-I.jpg',
-      condition: 'Nuevo',
-      free_shipping: false,
       address: {
         state: 'Capital Federal',
       },
     },
     {
+      id: 'MLA915796743',
+      seller_id: 26941396,
       author: {
-        name: 'Rodrigo',
-        lastname: 'Alvarellos',
+        name: 'MT-ELECTRO',
+        lastname: '',
       },
-      id: '3',
-      title: 'Bicicleta azul',
+      title: 'iPhone 11 128 Gb Negro',
       price: {
         currency: '$',
-        amount: '12000',
+        amount: '148.000',
         decimals: '00',
       },
-      picture: 'http://http2.mlstatic.com/D_908600-MLA32582065628_102019-I.jpg',
-      condition: 'Nuevo',
+      picture: 'http://http2.mlstatic.com/D_738648-MLA43654417399_102020-I.jpg',
+      condition: 'new',
       free_shipping: true,
       address: {
-        state: 'Mendoza',
+        state: 'Capital Federal',
       },
     },
     {
+      id: 'MLA917322558',
+      seller_id: 6673807,
       author: {
-        name: 'Rodrigo',
-        lastname: 'Alvarellos',
+        name: 'IDENTIKITNET',
+        lastname: '',
       },
-      id: '4',
-      title: 'Bicicleta amarilla',
+      title: ' iPhone SE (2nd Generation) 64 Gb Blanco',
       price: {
         currency: '$',
-        amount: '12000',
+        amount: '89.990',
         decimals: '00',
       },
-      picture: 'http://http2.mlstatic.com/D_908600-MLA32582065628_102019-I.jpg',
-      condition: 'Nuevo',
-      free_shipping: false,
+      picture: 'http://http2.mlstatic.com/D_732162-MLA42320762979_062020-I.jpg',
+      condition: 'new',
+      free_shipping: true,
+      address: {
+        state: 'Río Negro',
+      },
+    },
+    {
+      id: 'MLA912462032',
+      seller_id: 208137579,
+      author: {
+        name: 'ONECLICKARG',
+        lastname: '',
+      },
+      title: ' iPhone SE (2nd Generation) 128 Gb Negro',
+      price: {
+        currency: '$',
+        amount: '97.300',
+        decimals: '00',
+      },
+      picture: 'http://http2.mlstatic.com/D_896633-MLA42320762680_062020-I.jpg',
+      condition: 'new',
+      free_shipping: true,
       address: {
         state: 'Santa Fe',
       },

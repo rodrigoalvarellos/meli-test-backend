@@ -1,11 +1,11 @@
-import { MeliProductDescription } from "../interfaces/mlProductDescription.interface";
+import { MeliProductDescription } from '../interfaces/mlProductDescription.interface';
 
-
-export const fromMeliProdDescriptionToDescription = (data: MeliProductDescription) => {
-
-    const description = data.plain_text;
-
-    return description;
-    
-
-}
+/**
+ *  Transform the product description of the ML api to description string.
+ */
+export const fromMeliProdDescriptionToDescription = (
+  data: MeliProductDescription,
+) => {
+  const description: string = data.plain_text;
+  return description;
+};

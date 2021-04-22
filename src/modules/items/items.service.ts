@@ -1,4 +1,4 @@
-import { HttpService, Injectable } from '@nestjs/common';
+import { HttpService, Injectable, NotFoundException } from '@nestjs/common';
 import { map, tap } from 'rxjs/operators';
 import { ProductDetailMock } from '../../mocks/ProductDetailMock';
 import { SearchResultMock } from '../../mocks/SearchResultMock';
@@ -8,35 +8,31 @@ import { MeliProductDetail } from 'src/interfaces/mlProductDetail.interface';
 import { fromMeliCategoriesToCategories } from '../../transformers/fromMeliCategoriesToCategories.transform';
 import { fromMeliProdDescriptionToDescription } from '../../transformers/fromMeliProdDescriptionToDescription.transform';
 import { fromMeliSellerToAuthor } from '../../transformers/fromMeliSellerToAuthor.transform';
+import { SearchResult } from '../../interfaces/searchResult.interface';
+import { ProductDetailItem } from '../../interfaces/product-detail.iterface';
+import { Category } from '../../interfaces/category.interface';
+import { Author } from '../../interfaces/author.interface';
 
 @Injectable()
 export class ItemsService {
   mlEndpoint = 'https://api.mercadolibre.com';
   mlSearchLimit = 4;
-  // https://api.mercadolibre.com/items/​:id
-  // https://api.mercadolibre.com/items/​:id​/description
-  // https://api.mercadolibre.com/categories/:categoryId
-  constructor(private httpService: HttpService) {
-    this.getAuthorBySellerId('32369355');
-  }
 
-  getMockedItems() {
-    return SearchResultMock;
-  }
+  constructor(private httpService: HttpService) {}
 
-  getMockedProduct() {
-    return ProductDetailMock;
-  }
-
-  async getSearchResult(queryParam: string, categoryParam: string) {
-
+  /**
+   * Get a list of products by queryString or categoryId of ML api. 
+   * @params { queryParam, categoryParam }
+   * @return {promise}
+   */
+  async getSearchResult(queryParam: string, categoryParam: string): Promise<SearchResult> {
     let url = `${this.mlEndpoint}/sites/MLA/search?limit=${this.mlSearchLimit}`;
 
-    if(queryParam) {
+    if (queryParam) {
       url += `&q=${queryParam}`;
     }
 
-    if(categoryParam) {
+    if (categoryParam) {
       url += `&category=${categoryParam}`;
     }
 
@@ -55,10 +51,26 @@ export class ItemsService {
       }
 
       return searchResult;
-    } catch (error) {}
+    } catch (error) {
+      console.log('Error getting Search', { queryParam, categoryParam });
+      throw new NotFoundException(
+        {
+          message: 'No results for your search',
+          queryParam,
+          categoryParam,
+          error,
+        },
+        'Seach results not found',
+      );
+    }
   }
 
-  async getProductById(productId: string) {
+  /**
+   * Get a single products by productId from ML api
+   * @params { productId }
+   * @return {promise}
+   */
+  async getProductById(productId: string):  Promise<ProductDetailItem> {
     const url = `${this.mlEndpoint}/items/${productId}`;
 
     try {
@@ -86,10 +98,23 @@ export class ItemsService {
       return product;
     } catch (error) {
       console.log('Error fetching searched items', error);
+      throw new NotFoundException(
+        {
+          message: 'Product Detail noy found',
+          productId,
+          error,
+        },
+        'Product Detail not found',
+      );
     }
   }
 
-  async getCategoriesByProducId(productId: string) {
+  /**
+   * Get a list of categories by productId from ML api
+   * @params { productId }
+   * @return {promise}
+   */
+  async getCategoriesByProducId(productId: string): Promise<Category[]> {
     const url = `${this.mlEndpoint}/categories/${productId}`;
 
     try {
@@ -101,12 +126,23 @@ export class ItemsService {
       return categories;
     } catch (error) {
       console.log('error fetching categories', error);
+      throw new NotFoundException(
+        {
+          message: 'Categories for product noy found',
+          productId,
+          error,
+        },
+        'Categories for product noy found',
+      );
     }
-
-    return [];
   }
 
-  async getProductDescriptionById(productId: string) {
+  /**
+   * Get a list of categories by productId from ML api
+   * @params { productId }
+   * @return {promise}
+   */
+  async getProductDescriptionById(productId: string): Promise<string> {
     const url = `${this.mlEndpoint}/items/${productId}/description`;
 
     try {
@@ -117,12 +153,23 @@ export class ItemsService {
       return description;
     } catch (error) {
       console.log('error fetching description', error);
+      throw new NotFoundException(
+        {
+          message: 'Description for product noy found',
+          productId,
+          error,
+        },
+        'Description for product not found',
+      );
     }
-
-    return '';
   }
 
-  async getAuthorBySellerId(userId: string | number) {
+  /**
+   * Get a product author (seller) by userId from ML api
+   * @params { userId }
+   * @return {promise}
+   */
+  async getAuthorBySellerId(userId: string | number): Promise<Author> {
     const url = `${this.mlEndpoint}/users/${userId}`;
 
     try {
@@ -134,11 +181,30 @@ export class ItemsService {
       return author;
     } catch (error) {
       console.log('error fetching author', error);
+      throw new NotFoundException(
+        {
+          message: 'Author for product noy found',
+          userId,
+          error,
+        },
+        'Author for product noy found',
+      );
     }
+  }
 
-    return {
-      name: '',
-      lastname: '',
-    };
+  /**
+   * Get a mocked searchResult list
+   * @return SearchResult object
+   */
+  getMockedItems(): SearchResult {
+    return SearchResultMock;
+  }
+
+  /**
+   * Get a mocked ProductDetailItem object
+   * @return SearchResult object
+   */
+  getMockedProduct(): ProductDetailItem {
+    return ProductDetailMock;
   }
 }

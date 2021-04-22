@@ -1,15 +1,16 @@
-import { splitAmount } from '../helpers/helpers';
 import { MeliProductDetail } from '../interfaces/mlProductDetail.interface';
-import { setCurrencySymbol } from '../helpers/currency';
+import { setCurrencySymbol, splitAmount } from '../helpers/currency';
+import { ProductDetailItem } from '../interfaces/product-detail.iterface';
 
+/**
+ *  Transform the product detail of the ML api to ProductDetailItem type.
+ */
 export const fromMeliProductDetailToProductDetail = (
   data: MeliProductDetail,
 ) => {
-
-
   const price = splitAmount(data.price);
-  
-  const product = {
+
+  const product: ProductDetailItem = {
     author: {
       name: '',
       lastname: '',
@@ -17,6 +18,7 @@ export const fromMeliProductDetailToProductDetail = (
     categories: [],
     item: {
       id: data.id,
+      seller_id: data.seller_id,
       title: data.title,
       price: {
         currency: setCurrencySymbol(data.currency_id),

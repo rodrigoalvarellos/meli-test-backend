@@ -1,24 +1,32 @@
+import { Author } from '../interfaces/author.interface';
 import { MeliSeller } from '../interfaces/mlSeller.interface';
 
+/**
+ *  Transform the seller data of the ML api to Author type.
+ */
 export const fromMeliSellerToAuthor = (seller: MeliSeller) => {
+  let author: Author;
+
   if (!seller) {
-    return {
+    author = {
       name: '',
-      lastname: ''
+      lastname: '',
     };
   }
 
   if (seller.first_name && seller.last_name) {
-    return {
+    author = {
       name: seller.first_name,
       lastname: seller.last_name,
     };
   }
 
   if (seller.nickname) {
-    return {
+    author = {
       name: seller.nickname,
-      lastname: ''
+      lastname: '',
     };
   }
+
+  return author;
 };
