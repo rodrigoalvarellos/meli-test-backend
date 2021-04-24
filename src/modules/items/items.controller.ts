@@ -7,8 +7,8 @@ export class ItemsController {
 
   @Get()
   async getSearchResults(
-    @Query('q') query: string,
-    @Query('category') category: string,
+    @Query('q') query?: string,
+    @Query('category') category?: string,
   ) {
     return this.itemService.getSearchResult(query, category);
   }

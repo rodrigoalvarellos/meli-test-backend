@@ -25,7 +25,7 @@ export class ItemsService {
    * @params { queryParam, categoryParam }
    * @return {promise}
    */
-  async getSearchResult(queryParam: string, categoryParam: string): Promise<SearchResult> {
+  async getSearchResult(queryParam?: string, categoryParam?: string): Promise<SearchResult> {
     let url = `${this.mlEndpoint}/sites/MLA/search?limit=${this.mlSearchLimit}`;
 
     if (queryParam) {
