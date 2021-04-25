@@ -4,7 +4,7 @@ import { MeliSeller } from '../interfaces/mlSeller.interface';
 /**
  *  Transform the seller data of the ML api to Author type.
  */
-export const fromMeliSellerToAuthor = (seller: MeliSeller) => {
+export const fromMeliSellerToAuthor = (seller: MeliSeller): Author => {
   let author: Author;
 
   if (!seller) {

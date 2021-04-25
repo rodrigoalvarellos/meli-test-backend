@@ -7,7 +7,7 @@ import { ProductDetailItem } from '../interfaces/product-detail.iterface';
  */
 export const fromMeliProductDetailToProductDetail = (
   data: MeliProductDetail,
-) => {
+): ProductDetailItem  => {
   const price = splitAmount(data.price);
 
   const product: ProductDetailItem = {

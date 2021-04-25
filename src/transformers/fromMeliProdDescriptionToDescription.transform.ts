@@ -5,7 +5,7 @@ import { MeliProductDescription } from '../interfaces/mlProductDescription.inter
  */
 export const fromMeliProdDescriptionToDescription = (
   data: MeliProductDescription,
-) => {
+): string => {
   const description: string = data.plain_text;
   return description;
 };

@@ -5,7 +5,7 @@ import { SearchResult } from '../interfaces/searchResult.interface';
 /**
  *  Transform the search results  of the ML api to SearchResult type.
  */
-export const fromMeliSearchToSearch = (data: MeliSearchResponse) => {
+export const fromMeliSearchToSearch = (data: MeliSearchResponse): SearchResult => {
   const categories = data.filters.find((filter) => (filter.id = 'category'))
     .values[0].path_from_root;
 
