@@ -1,17 +1,17 @@
 import { HttpService, Injectable, NotFoundException } from '@nestjs/common';
 import { map, tap } from 'rxjs/operators';
-import { ProductDetailMock } from '../../mocks/ProductDetailMock';
-import { SearchResultMock } from '../../mocks/SearchResultMock';
 import { fromMeliSearchToSearch } from '../../transformers/fromMeliSearchToSearch.transform';
 import { fromMeliProductDetailToProductDetail } from '../../transformers/fromMeliProductDetailToProductDetail.transform';
-import { MeliProductDetail } from 'src/interfaces/mlProductDetail.interface';
 import { fromMeliCategoriesToCategories } from '../../transformers/fromMeliCategoriesToCategories.transform';
 import { fromMeliProdDescriptionToDescription } from '../../transformers/fromMeliProdDescriptionToDescription.transform';
 import { fromMeliSellerToAuthor } from '../../transformers/fromMeliSellerToAuthor.transform';
-import { SearchResult } from '../../interfaces/searchResult.interface';
 import { ProductDetailItem } from '../../interfaces/product-detail.iterface';
+import { MeliProductDetail } from '../../interfaces/mlProductDetail.interface';
+import { SearchResult } from '../../interfaces/searchResult.interface';
 import { Category } from '../../interfaces/category.interface';
 import { Author } from '../../interfaces/author.interface';
+import { SearchResultMock } from '../../mocks/SearchResultMock';
+import { ProductDetailMock } from '../../mocks/ProductDetailMock';
 
 @Injectable()
 export class ItemsService {
